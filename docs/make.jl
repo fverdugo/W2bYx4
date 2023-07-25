@@ -1,6 +1,16 @@
 using W2bYx4
 using Documenter
 
+command_jup = "jupyter"
+command_nbc = "nbconvert"
+output_format = "--to=html"
+theme = "--theme=dark"
+output = "--output=index"
+output_dir = "--output-dir=docs/src/notebook-output"
+infile = "docs/src/notebook.ipynb"
+run(`$command_jup $command_nbc $output_format $output $output_dir $theme $infile`)
+
+
 makedocs(;
     modules=[W2bYx4],
     authors="Francesc Verdugo <f.verdugo.rojano@vu.nl>",
