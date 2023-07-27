@@ -43,6 +43,13 @@ jobs:
       - uses: julia-actions/setup-julia@v1
         with:
           version: '1'
+      - name: Set up Python
+        uses: actions/setup-python@v4.7.0
+        with:
+          python-version: '3.9'
+      - name: Install nbconvert
+        run: |
+          python -m pip install jupyter nbconvert 
       - name: Configure doc environment
         run: |
           julia --project=docs/ -e '
