@@ -17,7 +17,7 @@ function modify_notebook_html( html_name )
 end
 
 # Convert to html
-function convert_notebook_to_html(notebook_path; output_name = "index", output_dir = "docs/src/notebook-output", theme = "dark")
+function convert_notebook_to_html(notebook_path; output_name = "index", output_dir = "./docs/src/notebook-output", theme = "dark")
     command_jup = "jupyter"
     command_nbc = "nbconvert"
     output_format = "--to=html"
@@ -29,7 +29,7 @@ function convert_notebook_to_html(notebook_path; output_name = "index", output_d
 end
 
 @show pwd()
-convert_notebook_to_html("docs/src/notebook.ipynb")
+convert_notebook_to_html("./docs/src/notebook.ipynb")
 # Modify html (resize iframe)
 modify_notebook_html("docs/src/notebook-output/index.html")
 
