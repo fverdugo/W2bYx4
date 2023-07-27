@@ -28,7 +28,6 @@ function convert_notebook_to_html(notebook_path; output_name = "index", output_d
     run(`$command_jup $command_nbc $output_format $output $output_dir $theme $infile`)
 end
 
-@show pwd()
 convert_notebook_to_html("./docs/src/notebook.ipynb")
 # Modify html (resize iframe)
 modify_notebook_html("docs/src/notebook-output/index.html")
