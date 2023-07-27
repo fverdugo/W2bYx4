@@ -1,21 +1,6 @@
 using W2bYx4
 using Documenter
 
-function modify_notebook_html( html_name )
-    content = open( html_name, "r" ) do html_file 
-        read( html_file, String )
-    end
-    content_new = replace(content, 
-        r"(<script\b[^>]*>[\s\S]*?<\/script>\K)" => 
-        s"\1\n\t<script src='../assets/iframeResizer.contentWindow.min.js'></script>\n";
-        count = 1
-    )
-    open( html_name, "w" ) do html_file
-        write( html_file, content_new )
-    end
-    return nothing
-end
-
 # Convert to html
 function convert_notebook_to_html(notebook_path; output_name = "index", output_dir = "./docs/src/notebook-output", theme = "dark")
     command_jup = "jupyter"
@@ -26,6 +11,29 @@ function convert_notebook_to_html(notebook_path; output_name = "index", output_d
     output_dir = "--output-dir=$output_dir"
     infile = notebook_path
     run(`$command_jup $command_nbc $output_format $output $output_dir $theme $infile`)
+end
+
+# Resize iframes using IframeResizer
+function modify_notebook_html( html_name )
+    content = open( html_name, "r" ) do html_file 
+        read( html_file, String )
+    end
+    content = replace(content, 
+        r"(<script\b[^>]*>[\s\S]*?<\/script>\K)" => 
+        s"\1\n\t<script src='../assets/iframeResizer.contentWindow.min.js'></script>\n";
+        count = 1
+    )
+    content = replace_colors(content)
+    open( html_name, "w" ) do html_file
+        write( html_file, content )
+    end
+    return nothing
+end
+
+function replace_colors(content)
+    content = replace( content, "--jp-layout-color0: #111111;" => "--jp-layout-color0: #1f2424;")
+    content = replace(content, "--md-grey-900: #212121;" => "--md-grey-900: #282f2f;")
+    return content
 end
 
 convert_notebook_to_html("./docs/src/notebook.ipynb")
