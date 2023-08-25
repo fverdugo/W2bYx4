@@ -50,7 +50,7 @@ makedocs(;
         prettyurls=get(ENV, "CI", "false") == "true",
         canonical="https://fverdugo.github.io/W2bYx4",
         edit_link="main",),
-    pages=["Home" => "index.md","Notebooks"=>["Notebook 1"=>"notebook.md", "Notebook 2"=>"notebook-2.md"]],
+    pages=["Home" => "index.md","Notebooks"=>["Notebook 1"=>"notebook.md", "Notebook 2"=>"notebook-2.md", "Foo"=>"notebooks/foo.md"]],
 )
 
 deploydocs(;
